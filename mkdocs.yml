@@ -31,6 +31,7 @@ theme:
   features:
     - content.tooltips
     - content.code.copy
+    - content.code.annotate
 
 extra_css:
   - css/extra.css
@@ -44,6 +45,8 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.betterem
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md

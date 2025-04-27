@@ -70,3 +70,13 @@
     int y = (int) x;        // Explicit casting
     byte z = (byte) y;      // Further explicit casting
     ```
+
+???+ info "Type Promotion"
+    In expressions, Java automatically promotes smaller data types to larger ones to avoid data loss. For example:
+
+    ``` java
+    byte a = 10;
+    byte b = 30;
+    int c = a * b;          // a and b are promoted to int
+    System.out.println(c);  // Output: 300
+    ```
