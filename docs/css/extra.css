@@ -1,0 +1,11 @@
+.md-typeset__table {
+    min-width: 100%;
+}
+
+.md-typeset__table td {
+    vertical-align: middle;
+}
+
+.md-typeset table:not([class]) {
+    display: table;
+}

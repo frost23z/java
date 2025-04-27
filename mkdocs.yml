@@ -1,5 +1,5 @@
 site_name: Java Notes
-site_url: http://patterns.zayedbinhasan.me/
+site_url: http://java.zayedbinhasan.me/
 repo_url: https://github.com/frost23z/java
 
 theme:
@@ -28,3 +28,29 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  features:
+    - content.tooltips
+    - content.code.copy
+
+extra_css:
+  - css/extra.css
+
+watch:
+  - includes
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.betterem
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences
+  - pymdownx.details
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - md_in_html
