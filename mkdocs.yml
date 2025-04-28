@@ -4,6 +4,8 @@ repo_url: https://github.com/frost23z/java
 
 theme:
   name: material
+  logo: 'media/icon/logo.png'
+  favicon: 'media/icon/logo.png'
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -57,3 +59,11 @@ markdown_extensions:
   - attr_list
   - def_list
   - md_in_html
+
+nav:
+  - index.md
+  - data_types.md
+  - conditionals.md
+  - arrays.md
+  - strings.md
+  - oop.md
