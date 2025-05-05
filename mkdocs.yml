@@ -20,7 +20,7 @@ theme:
       accent: deep purple
       toggle:
         icon: material/brightness-7
-        name: Switch to dark mode
+        name: Switch to dark mode- exceptions.md
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
@@ -52,7 +52,11 @@ markdown_extensions:
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.details
   - admonition
   - abbr
@@ -67,3 +71,6 @@ nav:
   - arrays.md
   - strings.md
   - oop.md
+  - additional.md
+  - threads.md
+  - collections.md

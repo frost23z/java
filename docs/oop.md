@@ -1021,6 +1021,71 @@
         }
         ```
 
+    === "Method References"
+        - Method references provide a shorthand for calling methods using the `::` operator.
+        - Types of method references:
+            1. **Static Method Reference**: `ClassName::staticMethod`
+            2. **Instance Method Reference**: `instance::instanceMethod`
+            3. **Instance Method of an Arbitrary Object**: `ClassName::instanceMethod`
+
+        ```java
+        import java.util.Arrays;
+        import java.util.List;
+
+        public class Main {
+            public static void main(String[] args) {
+                List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+
+                // Static method reference
+                names.forEach(System.out::println); // Outputs: Alice Bob Charlie
+
+                // Instance method reference
+                names.stream()
+                     .map(String::toUpperCase)
+                     .forEach(System.out::println); // Outputs: ALICE BOB CHARLIE
+            }
+        }
+        ```
+
+    === "Constructor References"
+        - Constructor references are used to create objects using the `::` operator.
+        - Syntax: `ClassName::new`
+
+        ```java
+        import java.util.function.Supplier;
+
+        class Example {
+            String message;
+
+            public Example() {
+                this.message = "Default Constructor";
+            }
+
+            public Example(String message) {
+                this.message = message;
+            }
+
+            @Override
+            public String toString() {
+                return message;
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                // Constructor reference for default constructor
+                Supplier<Example> defaultConstructor = Example::new;
+                Example example1 = defaultConstructor.get();
+                System.out.println(example1); // Outputs: Default Constructor
+
+                // Constructor reference for parameterized constructor
+                java.util.function.Function<String, Example> paramConstructor = Example::new;
+                Example example2 = paramConstructor.apply("Parameterized Constructor");
+                System.out.println(example2); // Outputs: Parameterized Constructor
+            }
+        }
+        ```
+
 ### Enum
 
 ???+ note "Enum"
@@ -1166,75 +1231,103 @@
         }
         ```
 
-### Lambda Expressions
+### `Optional` Class
 
-???+ note "Lambda Expressions"
-    - Lambda expressions provide a concise way to represent anonymous functions, introduced in Java 8.
-    - Commonly used with functional interfaces (interfaces with a single abstract method).
-    - Syntax: `(parameters) -> expression` or `(parameters) -> { statements }`
-    - Benefits:
-        - Reduces boilerplate code.
-        - Enhances readability and maintainability.
-        - Simplifies operations on collections and functional interfaces.
+???+ info "What is the `Optional` Class?"
+    - The `Optional` class, introduced in Java 8, is a container object used to represent the presence or absence of a value.
+    - It helps avoid `NullPointerException` by providing methods to handle null values gracefully.
 
-    === "Basic Syntax"
+    === "Key Features"
+    - **Avoid Null Checks**: Eliminates the need for explicit null checks.
+    - **Functional Style**: Provides methods like `map()`, `filter()`, and `ifPresent()` for functional programming.
+    - **Immutability**: Once created, the value inside an `Optional` cannot be changed.
+
+    === "Creating an `Optional`"
+    - **Empty Optional**: Represents the absence of a value.
         ```java
-        interface Greeting {
-            void sayHello(String name);
+        Optional<String> empty = Optional.empty();
+        System.out.println(empty.isPresent()); // Outputs: false
+        ```
+    - **Optional with a Value**: Wraps a non-null value.
+        ```java
+        Optional<String> optional = Optional.of("Hello");
+        System.out.println(optional.isPresent()); // Outputs: true
+        ```
+    - **Optional with a Nullable Value**: Allows null values.
+        ```java
+        Optional<String> nullable = Optional.ofNullable(null);
+        System.out.println(nullable.isPresent()); // Outputs: false
+        ```
+
+    === "Common Methods"
+    - **`isPresent()`**: Checks if a value is present.
+        ```java
+        Optional<String> optional = Optional.of("Hello");
+        System.out.println(optional.isPresent()); // Outputs: true
+        ```
+    - **`ifPresent(Consumer)`**: Executes a block of code if a value is present.
+        ```java
+        Optional<String> optional = Optional.of("Hello");
+        optional.ifPresent(value -> System.out.println("Value: " + value)); // Outputs: Value: Hello
+        ```
+    - **`orElse(T)`**: Returns the value if present, otherwise returns a default value.
+        ```java
+        Optional<String> optional = Optional.ofNullable(null);
+        System.out.println(optional.orElse("Default")); // Outputs: Default
+        ```
+    - **`orElseGet(Supplier)`**: Returns the value if present, otherwise invokes a supplier.
+        ```java
+        Optional<String> optional = Optional.ofNullable(null);
+        System.out.println(optional.orElseGet(() -> "Generated Default")); // Outputs: Generated Default
+        ```
+    - **`orElseThrow(Supplier)`**: Returns the value if present, otherwise throws an exception.
+        ```java
+        Optional<String> optional = Optional.ofNullable(null);
+        try {
+            System.out.println(optional.orElseThrow(() -> new IllegalArgumentException("Value is missing")));
+        } catch (Exception e) {
+            System.out.println(e.getMessage()); // Outputs: Value is missing
         }
+        ```
+    - **`map(Function)`**: Transforms the value if present.
+        ```java
+        Optional<String> optional = Optional.of("Hello");
+        Optional<Integer> length = optional.map(String::length);
+        System.out.println(length.orElse(0)); // Outputs: 5
+        ```
+    - **`filter(Predicate)`**: Filters the value based on a condition.
+        ```java
+        Optional<String> optional = Optional.of("Hello");
+        optional.filter(value -> value.startsWith("H"))
+                .ifPresent(System.out::println); // Outputs: Hello
+        ```
+
+    === "Example: Using `Optional`"
+        ```java
+        import java.util.Optional;
 
         public class Main {
             public static void main(String[] args) {
-                Greeting greeting = (name) -> System.out.println("Hello, " + name + "!");
-                greeting.sayHello("John"); // Outputs: Hello, John!
+                Optional<String> optional = Optional.ofNullable(getValue());
+
+                // Using ifPresent
+                optional.ifPresent(value -> System.out.println("Value: " + value));
+
+                // Using orElse
+                String result = optional.orElse("Default Value");
+                System.out.println("Result: " + result);
+
+                // Using map
+                optional.map(String::toUpperCase)
+                        .ifPresent(System.out::println);
+            }
+
+            private static String getValue() {
+                return null; // Simulate a method that may return null
             }
         }
         ```
 
-    === "Using with Collections"
-        - Simplifies operations like filtering, mapping, and iterating.
-
-        ```java
-        import java.util.Arrays;
-        import java.util.List;
-
-        public class Main {
-            public static void main(String[] args) {
-                List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
-
-                names.stream()
-                     .filter(name -> name.startsWith("A"))
-                     .forEach(System.out::println); // Outputs: Alice
-            }
-        }
-        ```
-
-    === "Method References"
-        - Method references provide a shorthand notation for calling methods using `ClassName::methodName`.
-
-        ```java
-        import java.util.Arrays;
-        import java.util.List;
-
-        public class Main {
-            public static void main(String[] args) {
-                List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
-
-                names.forEach(System.out::println); // Outputs: Alice Bob Charlie
-            }
-        }
-        ```
-
-    === "Functional Interfaces"
-        - Compatible with functional interfaces like `Predicate`, `Function`, `Consumer`, and `Supplier`.
-
-        ```java
-        import java.util.function.Predicate;
-
-        public class Main {
-            public static void main(String[] args) {
-                Predicate<Integer> isEven = n -> n % 2 == 0;
-                System.out.println(isEven.test(4)); // Outputs: true
-            }
-        }
-        ```
+    === "When to Use `Optional`"
+    - Use `Optional` as a return type for methods that may return null.
+    - Avoid using `Optional` for fields, method parameters, or collections to prevent unnecessary overhead.
