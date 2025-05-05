@@ -34,6 +34,11 @@ theme:
     - content.tooltips
     - content.code.copy
     - content.code.annotate
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.expand
+    - navigation.top
 
 extra_css:
   - css/extra.css
@@ -58,17 +63,21 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.details
+  - pymdownx.caret
+  - pymdownx.tilde
   - admonition
   - abbr
   - attr_list
   - def_list
   - md_in_html
+  - tables
 
 nav:
   - index.md
-  - data_types.md
-  - conditionals.md
-  - arrays.md
+  - Basics:
+    - 2_1_data_types.md
+    - 2_2_conditionals.md
+    - 2_3_arrays.md
   - strings.md
   - oop.md
   - additional.md

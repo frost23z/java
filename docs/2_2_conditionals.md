@@ -47,7 +47,6 @@
     int max = (a > b) ? a : b; // Assigns the larger value to max
     System.out.println("Max: " + max); // Output: Max: 20
     ```
-    
 
 ???+ tip "When to Use"
     - Use the ternary operator for simple conditional assignments.
@@ -85,7 +84,6 @@
         };
         System.out.println(dayName); // Output: Tuesday
         ```
-
         - The `->` operator is used to define the case actions, eliminating the need for `break` statements.
 
 ???+ tip "When to Use"
