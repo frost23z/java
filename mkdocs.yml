@@ -75,9 +75,9 @@ markdown_extensions:
 nav:
   - index.md
   - Basics:
-    - 2_1_data_types.md
-    - 2_2_conditionals.md
-    - 2_3_arrays.md
+    - basics/1_data_types.md
+    - basics/2_conditionals.md
+    - basics/3_arrays.md
   - strings.md
   - oop.md
   - additional.md
