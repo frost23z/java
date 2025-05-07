@@ -78,8 +78,16 @@ nav:
     - basics/1_data_types.md
     - basics/2_conditionals.md
     - basics/3_arrays.md
+  - OOP:
+    - oop/1_class_object_inheritance.md
+    - oop/2_modifiers.md
+    - oop/3_polymorphism.md
+    - oop/4_abstraction.md
+    - oop/5_object_class.md
+    - oop/6_wrapper_class.md
+    - oop/7_enum.md
+    - oop/8_optional_class.md
   - strings.md
-  - oop.md
   - additional.md
   - threads.md
   - collections.md
