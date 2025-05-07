@@ -1,17 +1,19 @@
 # Arrays
 
-### Quick Reference
-```java
-// Basic array operations
-int[] arr = new int[5];        // Fixed-size declaration
-int[] arr = {1, 2, 3};         // Initialization
-int[][] matrix = new int[3][]; // Jagged array
-```
+## Quick Reference
 
-### When to Use Arrays
-- Store multiple elements of the same type in a fixed-size collection.
-- Ideal for random access using an index.
-- Memory-efficient with better performance for fixed-size data.
+!!! example "Array Declaration and Initialization"
+
+    ```java
+    int[] arr = new int[5];        // Fixed-size declaration
+    int[] arr = {1, 2, 3};         // Initialization
+    int[][] matrix = new int[3][]; // Jagged array
+    ```
+
+???+ info "When to Use Arrays"
+    - Use arrays when you need a fixed-size collection of elements of the same type.
+    - Ideal for scenarios where you need fast access to elements using an index.
+    - Arrays are memory-efficient and provide better performance for fixed-size data.
 
 ???+ warning "Drawbacks of Arrays"
     - **Fixed Size**: Size cannot be changed after declaration.
@@ -71,7 +73,6 @@ int[][] matrix = new int[3][]; // Jagged array
         // Charlie
         ```
     === "Exceptions"
-        
 
         ```java
         Person[] people = new Person[3];

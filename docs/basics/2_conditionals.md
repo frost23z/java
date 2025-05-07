@@ -1,6 +1,6 @@
 # Conditionals
 
-### `&` vs `&&` and `|` vs `||`
+## `&` vs `&&` and `|` vs `||`
 
 ???+ warning "Key Differences"
     - `&` and `|`: Bitwise operators (for numbers) or Logical operators (for booleans, **no short-circuit**).
@@ -32,7 +32,7 @@
     - Use `&&` and `||` for logical conditions (better for safety and performance).
     - Use `&` and `|` only when both sides **must** be evaluated (rare cases).
 
-### Ternary Operator (`? :`)
+## Ternary Operator (`? :`)
 
 ???+ info "What is the Ternary Operator?"
     The ternary operator is a shorthand for `if-else` statements. It has the syntax:
@@ -52,7 +52,7 @@
     - Use the ternary operator for simple conditional assignments.
     - Avoid using it for complex logic as it can reduce code readability.
 
-### Enhanced `switch` Expression (Java 12+)
+## Enhanced `switch` Expression (Java 12+)
 
 ???+ info "What is the Enhanced `switch`?"
     The enhanced `switch` expression simplifies the syntax by removing the need for `break` statements and allows returning values directly. Example:
