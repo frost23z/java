@@ -1,61 +1,63 @@
 # String
 
-### String Creation and Memory
+## String Creation and Memory
 
 ???+ info "String Initialization"
-    In Java, `String` is a class, and strings are objects. `String` is a **final class**, meaning it cannot be extended. There are two ways to create strings, each with different memory implications:
+    In Java, `String` is a **final class**, meaning it cannot be extended. Strings are objects and can be created in two ways:
 
-    === "String Literal (Recommended)"
+    - **String Literal (Recommended):** Stored in the String Constant Pool, reuses references for identical strings.
 
-        ```java
-        String str = "Hello";  // Stored in String Constant Pool
-        String str2 = "Hello"; // Reuses the same reference
-        ```
-        ✅ Preferred for better memory efficiency and performance
+      ```java
+      String str = "Hello";  // Reuses reference
+      ```
+    - **String Object:** Stored in Heap Memory, creates a new object even if identical string exists.
 
-    === "String Object"
+      ```java
+      String str = new String("Hello");
+      ```
 
-        ```java
-        String str = new String("Hello");  // Stored in Heap Memory
-        String str2 = new String("Hello"); // Creates a new object in memory
-        ```
-        ⚠️ Creates new object even if identical string exists
+???+ info "String Immutability and Garbage Collection"
+    Strings are immutable. Modifying a string creates a new object, leaving the original eligible for garbage collection if unreferenced.
 
-???+ info "String Modification and Garbage Collection"
-    Strings are immutable, so modifying a string creates a new object in the **String Constant Pool** (if using literals) or in the heap (if using `new`). The original string remains unchanged. If the original string is no longer referenced, it becomes eligible for garbage collection.
+    ```java
+    String str = "Hello";
+    str = "World"; // "Hello" becomes eligible for garbage collection
+    System.out.println(str); // Outputs: World
+    ```
 
-    === "Example"
+## Mutable Strings
 
-        ```java
-        String str = "Hello";
-        str = "World"; // "Hello" becomes eligible for garbage collection if unreferenced
-        System.out.println(str); // Outputs: World
-        ```
-
-???+ info "StringBuilder and StringBuffer"
+???+ info "Mutable Strings"
     - **StringBuilder:** Faster, not thread-safe.
     - **StringBuffer:** Thread-safe, slower due to synchronization.
+    
+    > Use `StringBuilder` for performance in single-threaded scenarios and `StringBuffer` for thread-safe operations.
 
-    - Using `StringBuilder` or `StringBuffer` is more efficient in loops because it avoids creating multiple immutable `String` objects. Because strings are immutable, every time you modify a string, a new object is created. This can lead to performance issues, especially in loops or when concatenating many strings.
-    === "Example"
+    ```java
+    StringBuilder sb = new StringBuilder("Hello");
+    sb.append(" World"); // Modifies the original object
+    System.out.println(sb); // Outputs: Hello World
+    ```
 
-        ```java
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < 100000; i++) {
-            sb.append(i);  // More efficient than using String
-        }
-        System.out.println(sb.toString()); // Outputs the concatenated string
-        ```
+    > Use these classes in loops or for frequent string modifications to avoid creating multiple immutable objects.
 
-???+ info "String Joiner"
+    ```java
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < 100000; i++) {
+        sb.append(i); // Efficient thanks to mutable nature. If strings were used, it would create 100,000 objects.
+    }
+    System.out.println(sb.toString());
+    ```
+
+## String Joiner
+
+???+ info "Joining Strings"
     - Joins strings with a delimiter, prefix, and suffix.
 
-    === "Example"
+    ```java
+    import java.util.StringJoiner;
 
-        ```java
-        import java.util.StringJoiner;
-
-        StringJoiner joiner = new StringJoiner(", ", "[", "]");
-        joiner.add("Apple").add("Banana").add("Orange");
-        System.out.println(joiner); // Outputs: [Apple, Banana, Orange]
-        ```
+    StringJoiner joiner = new StringJoiner(", ", "[", "]");
+    joiner.add("Apple").add("Banana").add("Orange");
+    System.out.println(joiner); // Outputs: [Apple, Banana, Orange]
+    ```
