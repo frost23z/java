@@ -1,6 +1,6 @@
 # Object Class
 
-???+ note
+???+ abstract "`Object` Class"
     - The `Object` class is the root class of all classes in Java.
     - Every class in Java implicitly extends the `Object` class unless explicitly specified otherwise.
     - Commonly used methods include `toString()` and `equals()`.

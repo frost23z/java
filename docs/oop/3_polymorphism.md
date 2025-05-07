@@ -1,6 +1,6 @@
 # Polymorphism
 
-???+ note "Polymorphism"
+???+ abstract "Polymorphism"
     - Polymorphism allows methods to perform different tasks based on the object or context.
     - It is categorized into:
 
@@ -56,7 +56,7 @@
 
 ## Casting in Polymorphism
 
-???+ note "Casting"
+???+ abstract "Casting"
     - Casting is used to convert objects between parent and child classes, often in the context of polymorphism.
 
     === "Upcasting"

@@ -1,6 +1,6 @@
 # Enum
 
-???+ note "Enum"
+???+ info "Enum"
     - An **Enum** is a special data type that represents a group of constants.
     - Enums are used to define a fixed set of related constants, such as days of the week, directions, or states.
     - Key characteristics:

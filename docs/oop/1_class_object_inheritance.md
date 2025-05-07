@@ -2,7 +2,7 @@
 
 ## Class and Object
 
-???+ info "Class and Object"
+???+ abstract "Class and Object"
     === "Class"
         - A **class** is a blueprint or template for creating objects.
         - It defines **fields** (attributes/properties) and **methods** (behaviors/functions).
@@ -64,7 +64,7 @@
 
 ## Inheritance
 
-???+ info "Inheritance"
+???+ abstract "Inheritance"
     - Inheritance allows a class (child class) to acquire properties and methods of another class (parent class).
     - It promotes code reuse and establishes a parent-child relationship.
     - Java supports **single inheritance**, where a class can extend only one parent class. However, this can be multi-leveled (a class can inherit from another class, which in turn inherits from another class, and so on).
@@ -212,7 +212,7 @@
 
 ## Inner Class
 
-???+ note "Inner Class"
+???+ abstract "Inner Class"
     - An **Inner Class** is a class defined within another class.
     - Inner classes can access the members (including private members) of the outer class.
     - They are used to logically group classes that are only used in one place or to increase encapsulation.

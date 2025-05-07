@@ -1,6 +1,6 @@
 # Wrapper Class
 
-???+ note
+???+ abstract "Wrapper Class"
     - Wrapper classes in Java convert primitive types into objects and vice versa.
     - Since J2SE 5.0, autoboxing and unboxing automate this conversion.
 

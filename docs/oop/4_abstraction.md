@@ -2,7 +2,7 @@
 
 ## Abstract Class
 
-???+ note "Abstract Class"
+???+ abstract "Abstract Class"
     - An abstract class is a blueprint for other classes and cannot be instantiated directly.
     - Declared with the `abstract` keyword, it can include:
         - **Abstract methods**: Methods without implementation that must be overridden by subclasses.
@@ -269,13 +269,13 @@
 
 ## When to Use
 
-???+ note "When to Use Abstract Classes"
+???+ tip "When to Use Abstract Classes"
     - Use abstract classes when:
         - You need to share code among closely related classes.
         - You want to provide a common base class with default behavior.
         - You need constructors or non-final instance variables.
 
-???+ note "When to Use Interfaces"
+???+ tip "When to Use Interfaces"
     - Use interfaces when:
         - You need to define a contract for unrelated classes.
         - You want to achieve multiple inheritance.
