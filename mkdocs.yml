@@ -88,6 +88,7 @@ nav:
     - oop/7_enum.md
     - oop/8_optional_class.md
   - strings.md
-  - additional.md
-  - threads.md
   - collections.md
+  - streams.md
+  - threads.md
+  - additional.md
