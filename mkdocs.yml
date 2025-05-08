@@ -91,4 +91,6 @@ nav:
   - collections.md
   - streams.md
   - threads.md
-  - additional.md
+  - exceptions.md
+  - lambda.md
+  - annotations.md

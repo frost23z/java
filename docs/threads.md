@@ -1,25 +1,22 @@
 # Threads
 
-### Introduction to Threads
+## Introduction to Threads
 
 ???+ info "What are Threads?"
-    - A thread is a lightweight sub-process, the smallest unit of processing.
-    - Threads allow a program to perform multiple tasks concurrently.
-    - Java provides built-in support for multithreading through the `java.lang.Thread` class and the `Runnable` interface.
+    - Threads are lightweight sub-processes enabling concurrent task execution.
+    - Java supports multithreading via the `Thread` class and `Runnable` interface.
 
     === "Key Points"
-    - Threads share the same memory space but have their own stack.
-    - Multithreading improves performance by utilizing CPU resources efficiently.
-    - Threads can be in one of several states: `NEW`, `RUNNABLE`, `BLOCKED`, `WAITING`, `TIMED_WAITING`, or `TERMINATED`.
+    - Threads share memory but have individual stacks.
+    - States: `NEW`, `RUNNABLE`, `BLOCKED`, `WAITING`, `TIMED_WAITING`, `TERMINATED`.
 
-### Creating Threads
+## Creating Threads
 
 ???+ info "Ways to Create Threads"
-    - There are two main ways to create threads in Java:
-        1. By extending the `Thread` class.
-        2. By implementing the `Runnable` interface.
+    - Extend `Thread` class or implement `Runnable` interface.
 
-    === "Extending the `Thread` Class"
+    === "Extending `Thread` Class"
+
         ```java
         class MyThread extends Thread {
             @Override
@@ -36,7 +33,8 @@
         }
         ```
 
-    === "Implementing the `Runnable` Interface"
+    === "Implementing `Runnable` Interface"
+
         ```java
         class MyRunnable implements Runnable {
             @Override
@@ -53,7 +51,7 @@
         }
         ```
 
-### Thread Lifecycle
+## Thread Lifecycle
 
 ???+ info "Thread Lifecycle"
     - A thread in Java goes through the following states:
@@ -63,7 +61,8 @@
         4. **BLOCKED/WAITING/TIMED_WAITING**: The thread is waiting for a resource or signal.
         5. **TERMINATED**: The thread has completed execution.
 
-    === "Thread Lifecycle Example"
+    === "Lifecycle Example"
+
         ```java
         class MyThread extends Thread {
             @Override
@@ -75,14 +74,21 @@
         public class Main {
             public static void main(String[] args) {
                 MyThread thread = new MyThread();
-                System.out.println("Thread state: " + thread.getState()); // NEW
+                System.out.println("State: " + thread.getState()); // NEW
                 thread.start();
-                System.out.println("Thread state: " + thread.getState()); // RUNNABLE
+                System.out.println("State: " + thread.getState()); // RUNNABLE
+
+                try {
+                    thread.join(); // Wait for the thread to finish
+                } catch (InterruptedException e) {
+                    System.out.println("Main thread interrupted: " + e.getMessage());
+                }
+                System.out.println("State: " + thread.getState()); // TERMINATED
             }
         }
         ```
 
-### Thread Methods
+## Thread Methods
 
 ???+ info "Common Thread Methods"
     - `start()`: Starts the thread.
@@ -93,7 +99,8 @@
     - `setPriority(priority)`: Sets the thread's priority.
     - `getPriority()`: Gets the thread's priority.
 
-    === "Example: Using `sleep` and `join`"
+    === "Example: `sleep` and `join`"
+
         ```java
         class MyThread extends Thread {
             @Override
@@ -103,7 +110,7 @@
                     try {
                         Thread.sleep(500); // Pause for 500ms
                     } catch (InterruptedException e) {
-                        System.out.println("Thread interrupted: " + e.getMessage());
+                        System.out.println("Interrupted: " + e.getMessage());
                     }
                 }
             }
@@ -116,20 +123,21 @@
                 try {
                     thread.join(); // Wait for the thread to finish
                 } catch (InterruptedException e) {
-                    System.out.println("Main thread interrupted: " + e.getMessage());
+                    System.out.println("Main interrupted: " + e.getMessage());
                 }
-                System.out.println("Main thread finished.");
+                System.out.println("Main finished.");
             }
         }
         ```
 
-### Synchronization
+## Synchronization
 
 ???+ info "Thread Synchronization"
     - Synchronization is used to control access to shared resources in multithreaded environments.
     - It prevents thread interference and ensures data consistency.
 
     === "Using `synchronized` Keyword"
+
         ```java
         class Counter {
             private int count = 0;
@@ -148,15 +156,11 @@
                 Counter counter = new Counter();
 
                 Thread t1 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 Thread t2 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 t1.start();
@@ -166,7 +170,7 @@
                     t1.join();
                     t2.join();
                 } catch (InterruptedException e) {
-                    System.out.println("Thread interrupted: " + e.getMessage());
+                    System.out.println("Interrupted: " + e.getMessage());
                 }
 
                 System.out.println("Final count: " + counter.getCount()); // Outputs: 2000
@@ -174,19 +178,20 @@
         }
         ```
 
-### Deadlock
+## Deadlock
 
 ???+ info "Deadlock"
-    - A deadlock occurs when two or more threads are waiting for each other to release resources, causing a cycle of dependency and halting execution.
+    - Occurs when threads wait indefinitely for each other to release resources.
 
-    === "Example of Deadlock"
+    === "Example"
+
         ```java
         class Resource {
             void methodA(Resource other) {
                 synchronized (this) {
-                    System.out.println(Thread.currentThread().getName() + " locked this resource");
+                    System.out.println(Thread.currentThread().getName() + " locked this");
                     synchronized (other) {
-                        System.out.println(Thread.currentThread().getName() + " locked other resource");
+                        System.out.println(Thread.currentThread().getName() + " locked other");
                     }
                 }
             }
@@ -207,16 +212,17 @@
         ```
 
     === "Avoiding Deadlock"
-    - Use a consistent order of resource acquisition.
-    - Use `tryLock` from `java.util.concurrent.locks` to avoid indefinite blocking.
+    - Use consistent resource acquisition order.
+    - Use `tryLock` from `java.util.concurrent.locks`.
 
-### Thread Pool
+## Thread Pool
 
 ???+ info "Thread Pool"
     - A thread pool is a collection of pre-created threads that can be reused for executing tasks.
     - It improves performance by reducing the overhead of thread creation and destruction.
 
     === "Using `ExecutorService`"
+
         ```java
         import java.util.concurrent.ExecutorService;
         import java.util.concurrent.Executors;
@@ -237,7 +243,7 @@
         }
         ```
 
-### Concurrency Utilities
+## Concurrency Utilities
 
 ???+ info "Concurrency Utilities"
     - Java provides utilities in the `java.util.concurrent` package for advanced multithreading and concurrency control.
@@ -249,7 +255,8 @@
     - `Semaphore`: A counting semaphore for controlling access to a resource.
     - `ExecutorService`: A framework for managing thread pools.
 
-    === "Example: Using `CountDownLatch`"
+    === "Example: `CountDownLatch`"
+
         ```java
         import java.util.concurrent.CountDownLatch;
 
@@ -276,13 +283,14 @@
         }
         ```
 
-### Race Condition
+## Race Condition
 
 ???+ info "What is a Race Condition?"
     - A race condition occurs when two or more threads access shared data and try to modify it simultaneously.
     - The final outcome depends on the order in which the threads execute, leading to unpredictable behavior.
 
-    === "Example of Race Condition"
+    === "Example"
+
         ```java
         class Counter {
             private int count = 0;
@@ -301,15 +309,11 @@
                 Counter counter = new Counter();
 
                 Thread t1 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 Thread t2 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 t1.start();
@@ -319,7 +323,7 @@
                     t1.join();
                     t2.join();
                 } catch (InterruptedException e) {
-                    System.out.println("Thread interrupted: " + e.getMessage());
+                    System.out.println("Interrupted: " + e.getMessage());
                 }
 
                 System.out.println("Final count: " + counter.getCount()); // May not be 2000 due to race condition
@@ -327,56 +331,11 @@
         }
         ```
 
-    === "How to Prevent Race Conditions"
-    - Use synchronization to ensure that only one thread can access the critical section at a time.
-    - Use thread-safe classes like `AtomicInteger` or `ConcurrentHashMap`.
+    === "Prevention"
+    - Use `synchronized` or thread-safe classes like `AtomicInteger`.
 
-    === "Example: Using Synchronization"
-        ```java
-        class Counter {
-            private int count = 0;
+    === "Example: `AtomicInteger`"
 
-            public synchronized void increment() {
-                count++;
-            }
-
-            public int getCount() {
-                return count;
-            }
-        }
-
-        public class Main {
-            public static void main(String[] args) {
-                Counter counter = new Counter();
-
-                Thread t1 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
-                });
-
-                Thread t2 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
-                });
-
-                t1.start();
-                t2.start();
-
-                try {
-                    t1.join();
-                    t2.join();
-                } catch (InterruptedException e) {
-                    System.out.println("Thread interrupted: " + e.getMessage());
-                }
-
-                System.out.println("Final count: " + counter.getCount()); // Outputs: 2000
-            }
-        }
-        ```
-
-    === "Using Atomic Variables"
         ```java
         import java.util.concurrent.atomic.AtomicInteger;
 
@@ -397,15 +356,11 @@
                 Counter counter = new Counter();
 
                 Thread t1 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 Thread t2 = new Thread(() -> {
-                    for (int i = 0; i < 1000; i++) {
-                        counter.increment();
-                    }
+                    for (int i = 0; i < 1000; i++) counter.increment();
                 });
 
                 t1.start();
@@ -415,7 +370,7 @@
                     t1.join();
                     t2.join();
                 } catch (InterruptedException e) {
-                    System.out.println("Thread interrupted: " + e.getMessage());
+                    System.out.println("Interrupted: " + e.getMessage());
                 }
 
                 System.out.println("Final count: " + counter.getCount()); // Outputs: 2000
