@@ -94,3 +94,4 @@ nav:
   - exceptions.md
   - lambda.md
   - annotations.md
+  - jdbc.md

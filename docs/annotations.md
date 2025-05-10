@@ -1,6 +1,4 @@
-# Additional
-
-## Annotations
+# Annotations
 
 ???+ note "Annotations"
     - Annotations are a way to add metadata to your code.
